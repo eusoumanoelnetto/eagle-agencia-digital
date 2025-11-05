@@ -17,10 +17,3 @@ root.render(
     </ThemeProvider>
   </React.StrictMode>
 );
-
-// Remove o loading screen após a renderização inicial
-if (typeof window !== 'undefined' && window.__removeLoadingScreen) {
-  setTimeout(() => {
-    window.__removeLoadingScreen();
-  }, 100);
-}

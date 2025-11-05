@@ -170,7 +170,10 @@ export default function App() {
         <section className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center animate-ken-burns" 
-            style={{ backgroundImage: "url('https://levenaviagem.com.br/wp-content/uploads/2016/10/alter-do-chao-ilha-do-amor-2.jpg.webp')" }}
+            style={{ 
+              backgroundImage: "url('https://levenaviagem.com.br/wp-content/uploads/2016/10/alter-do-chao-ilha-do-amor-2.jpg.webp')",
+              willChange: 'transform'
+            }}
           ></div>
           <div className="absolute inset-0 bg-brand-blue bg-opacity-60"></div>
           <div className="relative z-10 p-6 max-w-3xl mx-auto">

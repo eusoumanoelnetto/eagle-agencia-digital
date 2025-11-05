@@ -6,6 +6,22 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Eagle Agência: Marketing Digital para Turismo em Alter do Chão</title>
+    
+    <!-- Preconnect para recursos externos -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://rsms.me" crossorigin>
+    <link rel="preconnect" href="https://api.rss2json.com" crossorigin>
+    
+    <!-- CSS crítico inline para evitar flash -->
+    <style>
+      html { scroll-behavior: smooth; }
+      body { margin: 0; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+      #root { min-height: 100vh; }
+      /* Evita flash of unstyled content */
+      .bg-brand-light { background-color: #f7f4ef; }
+      .dark .bg-brand-dark { background-color: #111827; }
+    </style>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <script>
@@ -105,56 +121,6 @@
 <link rel="stylesheet" href="index.css">
 </head>
   <body class="bg-brand-light dark:bg-brand-dark">
-    <!-- Loading spinner: aparece durante o carregamento inicial -->
-    <div id="__loading_screen" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:inherit;z-index:9999;">
-      <div style="text-align:center;">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite; color: #c0a062;">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M12 2 A10 10 0 0 1 22 12" stroke-opacity="0.3"/>
-        </svg>
-        <p style="margin-top:16px;color:#c0a062;font-family:Inter,sans-serif;font-size:14px;font-weight:500;">Carregando Eagle Agência...</p>
-      </div>
-    </div>
-    <style>
-      @keyframes spin { to { transform: rotate(360deg); } }
-    </style>
-    <script>
-      // Remove o loading screen quando a app React renderizar
-      window.__removeLoadingScreen = function() {
-        var loader = document.getElementById('__loading_screen');
-        if (loader) {
-          loader.style.opacity = '0';
-          loader.style.transition = 'opacity 0.3s ease-out';
-          setTimeout(function() { loader.style.display = 'none'; }, 300);
-        }
-      };
-    </script>
-    
-    <!-- Error overlay: mostrará erros de runtime caso algo quebre durante a inicialização -->
-    <div id="__error_overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);color:#fff;padding:24px;overflow:auto;z-index:99999;font-family:monospace;">
-      <h2 style="margin-top:0">Erro na aplicação</h2>
-      <pre id="__error_overlay_msg" style="white-space:pre-wrap;font-size:13px"></pre>
-      <button onclick="document.getElementById('__error_overlay').style.display='none'" style="margin-top:12px;padding:8px 12px;border-radius:6px;border:none;cursor:pointer">Fechar</button>
-    </div>
-    <script>
-      function showErrorOverlay(msg){
-        try{
-          window.__removeLoadingScreen && window.__removeLoadingScreen();
-          var el = document.getElementById('__error_overlay');
-          var pre = document.getElementById('__error_overlay_msg');
-          pre.textContent = msg;
-          el.style.display = 'block';
-        }catch(e){
-          console.error('Erro ao mostrar overlay', e);
-        }
-      }
-      window.addEventListener('error', function(ev){
-        showErrorOverlay((ev && ev.error && ev.error.stack) ? ev.error.stack : ev.message || String(ev));
-      });
-      window.addEventListener('unhandledrejection', function(ev){
-        showErrorOverlay(ev && ev.reason ? (ev.reason.stack || ev.reason) : String(ev));
-      });
-    </script>
     <div id="root"></div>
     <script type="module" src="index.tsx"></script>
   </body>
