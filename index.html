@@ -105,6 +105,30 @@
 <link rel="stylesheet" href="index.css">
 </head>
   <body class="bg-brand-light dark:bg-brand-dark">
+    <!-- Error overlay: mostrará erros de runtime caso algo quebre durante a inicialização -->
+    <div id="__error_overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);color:#fff;padding:24px;overflow:auto;z-index:99999;font-family:monospace;">
+      <h2 style="margin-top:0">Erro na aplicação</h2>
+      <pre id="__error_overlay_msg" style="white-space:pre-wrap;font-size:13px"></pre>
+      <button onclick="document.getElementById('__error_overlay').style.display='none'" style="margin-top:12px;padding:8px 12px;border-radius:6px;border:none;cursor:pointer">Fechar</button>
+    </div>
+    <script>
+      function showErrorOverlay(msg){
+        try{
+          var el = document.getElementById('__error_overlay');
+          var pre = document.getElementById('__error_overlay_msg');
+          pre.textContent = msg;
+          el.style.display = 'block';
+        }catch(e){
+          console.error('Erro ao mostrar overlay', e);
+        }
+      }
+      window.addEventListener('error', function(ev){
+        showErrorOverlay((ev && ev.error && ev.error.stack) ? ev.error.stack : ev.message || String(ev));
+      });
+      window.addEventListener('unhandledrejection', function(ev){
+        showErrorOverlay(ev && ev.reason ? (ev.reason.stack || ev.reason) : String(ev));
+      });
+    </script>
     <div id="root"></div>
     <script type="module" src="index.tsx"></script>
   </body>
