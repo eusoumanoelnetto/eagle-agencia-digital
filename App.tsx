@@ -172,7 +172,9 @@ export default function App() {
             className="absolute inset-0 bg-cover bg-center animate-ken-burns" 
             style={{ 
               backgroundImage: "url('https://levenaviagem.com.br/wp-content/uploads/2016/10/alter-do-chao-ilha-do-amor-2.jpg.webp')",
-              willChange: 'transform'
+              willChange: 'transform',
+              imageRendering: 'auto',
+              backfaceVisibility: 'hidden'
             }}
           ></div>
           <div className="absolute inset-0 bg-brand-blue bg-opacity-60"></div>
@@ -212,7 +214,13 @@ export default function App() {
           <AnimatedSection>
             <div className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
               <div className="md:w-1/2">
-                <img src={`${import.meta.env.BASE_URL}alter-do-chao-para-brasil.jpg`} alt="Vista de Alter do Chão" className="rounded-lg shadow-2xl w-full" />
+                <img 
+                  src={`${import.meta.env.BASE_URL}alter-do-chao-para-brasil.jpg`} 
+                  alt="Vista de Alter do Chão" 
+                  className="rounded-lg shadow-2xl w-full"
+                  loading="eager"
+                  decoding="async"
+                />
               </div>
               <div className="md:w-1/2">
                 <h2 className="text-3xl md:text-4xl font-bold text-brand-blue dark:text-white mb-4">Nossa Missão é o seu Sucesso</h2>
