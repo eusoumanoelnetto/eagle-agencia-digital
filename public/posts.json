@@ -1,0 +1,50 @@
+[
+  {
+    "imgSrc": "https://images.unsplash.com/photo-1593969569480-165865287f9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=872&q=80",
+    "postUrl": "https://www.instagram.com/",
+    "likes": 245,
+    "comments": 12
+  },
+  {
+    "imgSrc": "https://images.unsplash.com/photo-1621323321029-a400f3536838?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+    "postUrl": "https://www.instagram.com/",
+    "likes": 312,
+    "comments": 21
+  },
+  {
+    "imgSrc": "https://images.unsplash.com/photo-1558285545-6218b383431a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+    "postUrl": "https://www.instagram.com/",
+    "likes": 189,
+    "comments": 8
+  },
+  {
+    "imgSrc": "https://images.unsplash.com/photo-1607503386952-4a553259ea93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+    "postUrl": "https://www.instagram.com/",
+    "likes": 403,
+    "comments": 35
+  },
+  {
+    "imgSrc": "https://images.unsplash.com/photo-1594334344883-58532832895a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+    "postUrl": "https://www.instagram.com/",
+    "likes": 288,
+    "comments": 19
+  },
+  {
+    "imgSrc": "https://images.unsplash.com/photo-1588894986941-c138a0a9a2b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+    "postUrl": "https://www.instagram.com/",
+    "likes": 350,
+    "comments": 25
+  },
+  {
+    "imgSrc": "https://images.unsplash.com/photo-1594328598341-a71958511a54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+    "postUrl": "https://www.instagram.com/",
+    "likes": 215,
+    "comments": 15
+  },
+  {
+    "imgSrc": "https://images.unsplash.com/photo-1574284542270-39c043a58d35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+    "postUrl": "https://www.instagram.com/",
+    "likes": 450,
+    "comments": 42
+  }
+]
