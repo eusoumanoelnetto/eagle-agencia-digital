@@ -49,7 +49,7 @@ const InstagramFeed: React.FC = () => {
       </div>
       
       <a 
-        href="https://www.instagram.com/"
+        href="https://www.instagram.com/a.eagledigital/"
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-3 bg-brand-gold hover:bg-yellow-600 text-brand-blue font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105"
