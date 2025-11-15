@@ -3,16 +3,27 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ServiceCard from './components/ServiceCard';
-import { MarketingIcon } from './components/icons/MarketingIcon';
-import { WebsiteIcon } from './components/icons/WebsiteIcon';
-import { HostingIcon } from './components/icons/HostingIcon';
-import { TIIcon } from './components/icons/TIIcon';
-import { ConsultingIcon } from './components/icons/ConsultingIcon';
-import { SocialMediaIcon } from './components/icons/SocialMediaIcon';
 import AnimatedSection from './components/AnimatedSection';
 import InstagramFeed from './components/InstagramFeed';
 import WhatsAppButton from './components/WhatsAppButton';
 import BlogCard from './components/BlogCard';
+import WhyAlterSection from './components/WhyAlterSection';
+import AgencySection from './components/AgencySection';
+import RentalsSection from './components/RentalsSection';
+import ToursSection from './components/ToursSection';
+import DifferentialsSection from './components/DifferentialsSection';
+import TestimonialsSection from './components/TestimonialsSection';
+import ProcessSection from './components/ProcessSection';
+import SuccessCasesSection from './components/SuccessCasesSection';
+
+interface BlogPost {
+  title: string;
+  thumbnail: string;
+  link: string;
+  pubDate: string;
+  content: string;
+  slug: string;
+}
 
 export default function App() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -20,38 +31,9 @@ export default function App() {
   const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loadingPosts, setLoadingPosts] = useState(true);
 
-  useEffect(() => {
-    const handleAnchorClick = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      // Fix: Cast anchor to HTMLAnchorElement to access properties like pathname and hostname.
-      const anchor = target.closest<HTMLAnchorElement>('a[href^="#"]');
-      
-      if (!anchor) return;
-
-      if (anchor.pathname === window.location.pathname && anchor.hostname === window.location.hostname) {
-        const targetId = anchor.getAttribute('href')?.substring(1);
-        if (targetId) {
-          const element = document.getElementById(targetId);
-          if (element) {
-            event.preventDefault();
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            element.scrollIntoView({
-              behavior: prefersReducedMotion ? 'auto' : 'smooth',
-            });
-          }
-        }
-      }
-    };
-
-    document.addEventListener('click', handleAnchorClick);
-    return () => {
-      document.removeEventListener('click', handleAnchorClick);
-    };
-  }, []);
-  
   const createSnippet = (htmlContent: string, maxLength = 120) => {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = htmlContent;
@@ -62,12 +44,23 @@ export default function App() {
     return text;
   };
 
+  const createSlug = (title: string) => {
+    return title
+      .toLowerCase()
+      .replace(/ /g, '-')
+      .replace(/[^\w-]+/g, '');
+  };
+
   useEffect(() => {
     fetch('https://api.rss2json.com/v1/api.json?rss_url=https://agenciaeagledigital.blogspot.com/feeds/posts/default')
         .then(res => res.json())
         .then(data => {
             if (data.status === 'ok' && data.items) {
-                setPosts(data.items.slice(0, 3));
+                const formattedPosts = data.items.map((item: any) => ({
+                    ...item,
+                    slug: createSlug(item.title)
+                })).slice(0, 3);
+                setPosts(formattedPosts);
             }
             setLoadingPosts(false);
         })
@@ -77,36 +70,46 @@ export default function App() {
         });
   }, []);
 
-  const services = [
+  const solutions = [
     {
-      icon: <MarketingIcon />,
-      title: "Marketing Digital",
-      description: "Estratégias para sua marca ganhar destaque na Internet."
+      category: "Máxima Visibilidade Online",
+      items: [
+         {
+          icon: <i className="fa-solid fa-bullhorn fa-3x"></i>,
+          title: "Marketing Digital Estratégico",
+          description: "Estratégias completas para sua marca ganhar destaque e atrair o público certo na internet."
+        },
+        {
+          icon: <i className="fa-solid fa-share-nodes fa-3x"></i>,
+          title: "Gestão de Social Media",
+          description: "Criamos conteúdo relevante e gerenciamos suas redes sociais para engajar e construir uma comunidade fiel."
+        },
+        {
+          icon: <i className="fa-solid fa-code fa-3x"></i>,
+          title: "Criação de Websites de Conversão",
+          description: "Desenvolvemos sites focados em transformar visitantes em clientes, com design e performance de ponta."
+        },
+      ]
     },
-    {
-      icon: <HostingIcon />,
-      title: "Hospedagem de WebSite",
-      description: "Trabalhamos com a hospedagem mais moderna e segura da atualidade."
-    },
-    {
-      icon: <WebsiteIcon />,
-      title: "Criação de WebSite",
-      description: "Desenvolvemos Websites focados em converter visitantes em clientes."
-    },
-    {
-      icon: <TIIcon />,
-      title: "Serviços de TI",
-      description: "Suporte técnico e soluções de TI para manter seu negócio funcionando."
-    },
-    {
-      icon: <ConsultingIcon />,
-      title: "Assessoria Completa",
-      description: "Consultoria estratégica para otimizar seus resultados e processos."
-    },
-    {
-      icon: <SocialMediaIcon />,
-      title: "Social Media",
-      description: "Gestão de redes sociais para engajar seu público e fortalecer sua marca."
+     {
+      category: "Gestão e Operação Simplificadas",
+      items: [
+        {
+          icon: <i className="fa-solid fa-handshake-angle fa-3x"></i>,
+          title: "Assessoria Completa",
+          description: "Consultoria estratégica para otimizar seus processos, aumentar a ocupação e maximizar seus resultados."
+        },
+        {
+          icon: <i className="fa-solid fa-screwdriver-wrench fa-3x"></i>,
+          title: "Serviços de TI e Suporte",
+          description: "Suporte técnico e soluções de TI para manter seu negócio funcionando sem interrupções."
+        },
+        {
+          icon: <i className="fa-solid fa-server fa-3x"></i>,
+          title: "Hospedagem Segura e Rápida",
+          description: "Trabalhamos com a hospedagem mais moderna e segura da atualidade para seu site."
+        },
+      ]
     }
   ];
 
@@ -170,12 +173,7 @@ export default function App() {
         <section className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center animate-ken-burns" 
-            style={{ 
-              backgroundImage: "url('https://levenaviagem.com.br/wp-content/uploads/2016/10/alter-do-chao-ilha-do-amor-2.jpg.webp')",
-              willChange: 'transform',
-              imageRendering: 'auto',
-              backfaceVisibility: 'hidden'
-            }}
+            style={{ backgroundImage: "url('https://levenaviagem.com.br/wp-content/uploads/2016/10/alter-do-chao-ilha-do-amor-2.jpg.webp')" }}
           ></div>
           <div className="absolute inset-0 bg-brand-blue bg-opacity-60"></div>
           <div className="relative z-10 p-6 max-w-3xl mx-auto">
@@ -198,43 +196,40 @@ export default function App() {
         <section id="services" className="py-20 bg-white dark:bg-brand-dark-secondary">
           <AnimatedSection>
             <div className="container mx-auto px-6 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-blue dark:text-white mb-4">Nossos Serviços</h2>
-              <p className="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">Soluções completas para fortalecer sua presença online e atrair mais clientes.</p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {services.map((service, index) => (
-                  <ServiceCard key={index} icon={service.icon} title={service.title} description={service.description} />
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-blue dark:text-white mb-4">Nossas Soluções</h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto">Traduzimos suas necessidades em resultados. Oferecemos pacotes completos que transformam a maneira como seu negócio é visto e gerenciado no mundo digital.</p>
+              
+              <div className="space-y-16">
+                {solutions.map((solution, index) => (
+                  <div key={index}>
+                    <h3 className="text-2xl font-semibold text-brand-blue dark:text-white mb-8 border-b-2 border-brand-gold/30 pb-4 inline-block">{solution.category}</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                      {solution.items.map((service, serviceIndex) => (
+                        <ServiceCard key={serviceIndex} icon={service.icon} title={service.title} description={service.description} />
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
+
             </div>
           </AnimatedSection>
         </section>
 
-        {/* About Section */}
-        <section id="about" className="py-20 bg-brand-light dark:bg-brand-dark">
-          <AnimatedSection>
-            <div className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
-              <div className="md:w-1/2">
-                <img 
-                  src={`${import.meta.env.BASE_URL}alter-do-chao-para-brasil.jpg`} 
-                  alt="Vista de Alter do Chão" 
-                  className="rounded-lg shadow-2xl w-full"
-                  loading="eager"
-                  decoding="async"
-                />
-              </div>
-              <div className="md:w-1/2">
-                <h2 className="text-3xl md:text-4xl font-bold text-brand-blue dark:text-white mb-4">Nossa Missão é o seu Sucesso</h2>
-                <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-                  A Eagle Agência Digital nasceu da paixão pelo marketing e pelo potencial único de Alter do Chão. Entendemos as necessidades específicas de pousadas, hotéis e ONGs da região.
-                </p>
-                <p className="text-lg text-gray-700 dark:text-gray-300">
-                  Nosso objetivo é usar a estratégia digital para contar sua história, valorizar o turismo sustentável e fortalecer o impacto social, garantindo que seu negócio não apenas seja visto, mas também lembrado e preferido.
-                </p>
-              </div>
-            </div>
-          </AnimatedSection>
-        </section>
+        <AgencySection />
         
+        <WhyAlterSection />
+
+        <RentalsSection />
+
+        <ToursSection />
+
+        <DifferentialsSection />
+
+        <SuccessCasesSection />
+        
+        <TestimonialsSection />
+
         {/* Blog Section */}
         <section id="blog" className="py-20 bg-white dark:bg-brand-dark-secondary">
             <AnimatedSection>
@@ -251,7 +246,7 @@ export default function App() {
                                     key={index} 
                                     title={post.title}
                                     thumbnail={post.thumbnail}
-                                    link={post.link}
+                                    link={`/blog/${post.slug}`} // Link interno
                                     pubDate={post.pubDate}
                                     snippet={createSnippet(post.content)}
                                 />
@@ -262,9 +257,7 @@ export default function App() {
                     )}
 
                     <a 
-                      href="https://agenciaeagledigital.blogspot.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href="/blog" // Link para a futura página do blog
                       className="inline-flex items-center gap-3 bg-brand-gold hover:bg-yellow-600 text-brand-blue font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105"
                     >
                       Ver Todos os Posts
@@ -279,6 +272,8 @@ export default function App() {
             <InstagramFeed />
           </AnimatedSection>
         </section>
+
+        <ProcessSection />
 
         {/* Contact Section */}
         <section id="contact" className="py-20 bg-brand-blue text-white">

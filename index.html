@@ -3,35 +3,89 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Eagle Agência: Marketing Digital para Turismo em Alter do Chão</title>
-    <!-- Open Graph / Social preview -->
-    <meta name="description" content="Marketing digital e social media para hotéis, pousadas e ONGs em Alter do Chão. Aumente sua visibilidade com a Eagle." />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Eagle Agência Digital" />
-    <meta property="og:site_name" content="Eagle Agência Digital" />
-    <meta property="og:description" content="Marketing digital e social media para hotéis, pousadas e ONGs em Alter do Chão. Aumente sua visibilidade com a Eagle." />
-    <meta property="og:url" content="https://eusoumanoelnetto.github.io/eagle-agencia-digital/" />
-    <meta property="og:image" content="https://eusoumanoelnetto.github.io/eagle-agencia-digital/assets/banner.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Eagle Agência Digital" />
-    <meta name="twitter:description" content="Marketing digital e social media para hotéis, pousadas e ONGs em Alter do Chão." />
-    <meta name="twitter:image" content="https://eusoumanoelnetto.github.io/eagle-agencia-digital/assets/banner.png" />
-    <link rel="image_src" href="https://eusoumanoelnetto.github.io/eagle-agencia-digital/assets/banner.png" />
-    
-    <!-- Preconnect para recursos externos -->
-    <link rel="preconnect" href="https://rsms.me" crossorigin>
-    <link rel="preconnect" href="https://api.rss2json.com" crossorigin>
-    <link rel="preconnect" href="https://levenaviagem.com.br" crossorigin>
-    <link rel="dns-prefetch" href="https://aistudiocdn.com">
-    
-    <!-- Preload da imagem hero para carregamento instantâneo -->
-    <link rel="preload" as="image" href="https://levenaviagem.com.br/wp-content/uploads/2016/10/alter-do-chao-ilha-do-amor-2.jpg.webp" fetchpriority="high">
-    <link rel="preload" as="image" href="/alter-do-chao-para-brasil.jpg">
-    
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <script src="/theme.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+      // Aplica o tema escuro/claro antes da renderização da página para evitar flash
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class', // Habilita o modo escuro baseado em classe
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              'brand-blue': '#1a2a4c',
+              'brand-gold': '#c0a062',
+              'brand-light': '#f7f4ef',
+              'brand-gray': '#333333',
+              // Cores para o modo escuro
+              'brand-dark': '#111827', // bg principal
+              'brand-dark-secondary': '#1f2937', // bg de cards
+              'brand-light-gray': '#d1d5db', // texto
+            },
+            animation: {
+              'fade-in-down': 'fade-in-down 0.8s ease-out forwards',
+              'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
+              'ken-burns': 'ken-burns 20s ease-out infinite alternate',
+              'pulse-subtle': 'pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              'fade-in-down': {
+                '0%': { opacity: '0', transform: 'translateY(-20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              'fade-in-up': {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              'ken-burns': {
+                '0%': { transform: 'scale(1)' },
+                '100%': { transform: 'scale(1.15)' },
+              },
+              'pulse-subtle': {
+                '0%, 100%': { transform: 'scale(1)' },
+                '50%': { transform: 'scale(1.05)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Smooth scrolling for anchor links */
+      @media (prefers-reduced-motion: no-preference) {
+        html {
+          scroll-behavior: smooth;
+        }
+      }
+      
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1a2a4c;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #c0a062;
+        border-radius: 5px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #d4b274;
+      }
+    </style>
   <script type="importmap">
 {
   "imports": {
@@ -41,10 +95,10 @@
   }
 }
 </script>
-<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="/index.css">
 </head>
   <body class="bg-brand-light dark:bg-brand-dark">
     <div id="root"></div>
-    <script type="module" src="index.tsx"></script>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>

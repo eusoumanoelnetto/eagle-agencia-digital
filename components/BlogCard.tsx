@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { ExternalLinkIcon } from './icons/ExternalLinkIcon';
+import { ArrowRightIcon } from './icons/ArrowRightIcon';
 
 interface BlogCardProps {
   title: string;
@@ -22,11 +23,18 @@ const BlogCard: React.FC<BlogCardProps> = ({ title, thumbnail, link, snippet, pu
     e.currentTarget.src = fallbackImage;
   };
 
+  // Lembrete: Este link é um placeholder. A implementação de rotas requer um roteador (ex: React Router).
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Previne o comportamento padrão até que o roteamento seja implementado.
+    // Em uma aplicação real com roteador, essa linha seria removida.
+    e.preventDefault(); 
+    console.log(`Navegação para: ${link}. Implementar roteamento.`);
+  };
+
   return (
     <a 
       href={link} 
-      target="_blank" 
-      rel="noopener noreferrer" 
+      // onClick={handleClick} // Descomente quando o roteador estiver pronto
       className="group bg-white dark:bg-brand-dark rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden flex flex-col border border-gray-200 dark:border-gray-700"
     >
       <div className="relative w-full h-48 overflow-hidden">
@@ -44,7 +52,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ title, thumbnail, link, snippet, pu
         <div className="mt-auto">
           <span className="inline-flex items-center gap-1 text-brand-gold font-semibold group-hover:underline">
             Leia Mais
-            <ExternalLinkIcon className="w-4 h-4" />
+            <ArrowRightIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </span>
         </div>
       </div>

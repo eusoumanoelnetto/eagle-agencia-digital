@@ -4,9 +4,10 @@ import React, { useRef, useEffect, useState } from 'react';
 interface AnimatedSectionProps {
   children: React.ReactNode;
   className?: string;
+  direction?: 'up' | 'down' | 'left' | 'right';
 }
 
-const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children, className = '' }) => {
+const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children, className = '', direction = 'up' }) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -36,11 +37,20 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children, className =
     };
   }, []);
 
+  const directionClasses = {
+    up: 'translate-y-8',
+    down: '-translate-y-8',
+    left: '-translate-x-8',
+    right: 'translate-x-8',
+  };
+
+  const initialTransform = directionClasses[direction];
+
   return (
     <div
       ref={sectionRef}
       className={`${className} transition-all duration-1000 ease-out ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        isVisible ? 'opacity-100 translate-y-0 translate-x-0' : `opacity-0 ${initialTransform}`
       }`}
     >
       {children}

@@ -13,15 +13,11 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
-      // 1) Se o usuário definiu manualmente, respeita
-      const override = (localStorage.getItem('themeOverride') as Theme | null) || (localStorage.getItem('theme') as Theme | null);
-      if (override === 'light' || override === 'dark') {
-        return override;
+      const storedTheme = localStorage.getItem('theme') as Theme | null;
+      if (storedTheme) {
+        return storedTheme;
       }
-
-      // 2) Caso contrário, escolhe por horário local (06:00–18:00 claro, fora isso escuro)
-      const hour = new Date().getHours();
-      return hour >= 6 && hour < 18 ? 'light' : 'dark';
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     return 'light';
   });
@@ -29,18 +25,15 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prevTheme => {
-      const next = prevTheme === 'light' ? 'dark' : 'light';
-      // Ao alternar manualmente, grava override explícito
-      localStorage.setItem('themeOverride', next);
-      return next;
-    });
+    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
   return (

@@ -14,22 +14,7 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleSmoothScroll = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    const targetId = event.currentTarget.getAttribute('href')?.substring(1);
-    if (targetId) {
-      const element = document.getElementById(targetId);
-      if (element) {
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        element.scrollIntoView({
-          behavior: prefersReducedMotion ? 'auto' : 'smooth',
-        });
-      }
-    }
-  };
-  
-  const handleMobileLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    handleSmoothScroll(event);
+  const handleMobileLinkClick = () => {
     setIsMobileMenuOpen(false);
   };
 
@@ -50,12 +35,13 @@ const Header: React.FC = () => {
           />
         </div>
         <nav className="hidden md:flex items-center space-x-6">
-          <a href="#services" className={navLinkClasses} onClick={handleSmoothScroll}>Serviços</a>
-          <a href="#about" className={navLinkClasses} onClick={handleSmoothScroll}>Sobre Nós</a>
-          <a href="#blog" className={navLinkClasses} onClick={handleSmoothScroll}>Blog</a>
+          <a href="#services" className={navLinkClasses}>Soluções</a>
+          <a href="#agency" className={navLinkClasses}>Agência</a>
+          <a href="#differentials" className={navLinkClasses}>Diferenciais</a>
+          <a href="#cases" className={navLinkClasses}>Cases</a>
+          <a href="#blog" className={navLinkClasses}>Blog</a>
           <a 
             href="#contact" 
-            onClick={handleSmoothScroll}
             className={`bg-brand-gold hover:bg-yellow-600 text-brand-blue font-bold py-2 px-5 rounded-full transition duration-300 transform hover:scale-105 ${!isScrolled && 'animate-pulse-subtle'}`}
           >
             Contato
@@ -81,8 +67,10 @@ const Header: React.FC = () => {
       {/* Mobile Menu */}
       <div className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${isMobileMenuOpen ? 'max-h-screen' : 'max-h-0'}`}>
         <nav className="bg-brand-blue dark:bg-brand-dark flex flex-col items-center space-y-5 py-5 border-t border-white/10">
-          <a href="#services" onClick={handleMobileLinkClick} className={navLinkClasses}>Serviços</a>
-          <a href="#about" onClick={handleMobileLinkClick} className={navLinkClasses}>Sobre Nós</a>
+          <a href="#services" onClick={handleMobileLinkClick} className={navLinkClasses}>Soluções</a>
+          <a href="#agency" onClick={handleMobileLinkClick} className={navLinkClasses}>Agência</a>
+          <a href="#differentials" onClick={handleMobileLinkClick} className={navLinkClasses}>Diferenciais</a>
+          <a href="#cases" onClick={handleMobileLinkClick} className={navLinkClasses}>Cases</a>
           <a href="#blog" onClick={handleMobileLinkClick} className={navLinkClasses}>Blog</a>
           <a href="#contact" onClick={handleMobileLinkClick} className="bg-brand-gold hover:bg-yellow-600 text-brand-blue font-bold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105">
             Contato
