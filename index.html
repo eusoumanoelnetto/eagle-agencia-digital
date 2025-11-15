@@ -21,7 +21,6 @@
     <link rel="image_src" href="https://eusoumanoelnetto.github.io/eagle-agencia-digital/assets/banner.png" />
     
     <!-- Preconnect para recursos externos -->
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link rel="preconnect" href="https://rsms.me" crossorigin>
     <link rel="preconnect" href="https://api.rss2json.com" crossorigin>
     <link rel="preconnect" href="https://levenaviagem.com.br" crossorigin>
@@ -31,130 +30,8 @@
     <link rel="preload" as="image" href="https://levenaviagem.com.br/wp-content/uploads/2016/10/alter-do-chao-ilha-do-amor-2.jpg.webp" fetchpriority="high">
     <link rel="preload" as="image" href="/eagle-agencia-digital/alter-do-chao-para-brasil.jpg">
     
-    <!-- CSS crítico inline para evitar flash -->
-    <style>
-      html { scroll-behavior: smooth; }
-      body { 
-        margin: 0; 
-        font-family: 'Inter', sans-serif; 
-        -webkit-font-smoothing: antialiased; 
-        -moz-osx-font-smoothing: grayscale; 
-        /* Força o background desde o início */
-        background-color: #f7f4ef;
-        transition: background-color 0s;
-      }
-      html.dark body { 
-        background-color: #111827;
-      }
-      #root { 
-        min-height: 100vh; 
-        /* Evita reflow durante carregamento */
-        contain: layout style paint;
-      }
-      /* Garante que o background apareça imediatamente */
-      .bg-brand-light { background-color: #f7f4ef !important; }
-      .dark .bg-brand-dark { background-color: #111827 !important; }
-      
-      /* Skeleton para hero durante carregamento */
-      #root:empty::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, #1a2a4c 0%, #2a3a5c 100%);
-        z-index: -1;
-      }
-    </style>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <script>
-      // Aplica o tema antes da renderização para evitar flash (FOUC)
-      (function() {
-        try {
-          var override = localStorage.getItem('themeOverride') || localStorage.getItem('theme');
-          if (override === 'light' || override === 'dark') {
-            if (override === 'dark') document.documentElement.classList.add('dark');
-            else document.documentElement.classList.remove('dark');
-            return;
-          }
-          // Sem override: usa horário local (06:00–18:00 claro; noite escuro)
-          var hour = new Date().getHours();
-          var night = !(hour >= 6 && hour < 18);
-          if (night) document.documentElement.classList.add('dark');
-          else document.documentElement.classList.remove('dark');
-        } catch (e) {
-          // Fallback seguro
-          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark');
-          }
-        }
-      })();
-    </script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class', // Habilita o modo escuro baseado em classe
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-            colors: {
-              'brand-blue': '#1a2a4c',
-              'brand-gold': '#c0a062',
-              'brand-light': '#f7f4ef',
-              'brand-gray': '#333333',
-              // Cores para o modo escuro
-              'brand-dark': '#111827', // bg principal
-              'brand-dark-secondary': '#1f2937', // bg de cards
-              'brand-light-gray': '#d1d5db', // texto
-            },
-            animation: {
-              'fade-in-down': 'fade-in-down 0.8s ease-out forwards',
-              'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
-              'ken-burns': 'ken-burns 20s ease-out infinite alternate',
-              'pulse-subtle': 'pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            },
-            keyframes: {
-              'fade-in-down': {
-                '0%': { opacity: '0', transform: 'translateY(-20px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
-              'fade-in-up': {
-                '0%': { opacity: '0', transform: 'translateY(20px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
-              'ken-burns': {
-                '0%': { transform: 'scale(1)' },
-                '100%': { transform: 'scale(1.15)' },
-              },
-              'pulse-subtle': {
-                '0%, 100%': { transform: 'scale(1)' },
-                '50%': { transform: 'scale(1.05)' },
-              }
-            }
-          }
-        }
-      }
-    </script>
-    <style>
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 10px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #1a2a4c;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #c0a062;
-        border-radius: 5px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #d4b274;
-      }
-    </style>
+    <script src="/eagle-agencia-digital/theme.js"></script>
 
   <script type="importmap">
 {
@@ -165,8 +42,8 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/eagle-agencia-digital/assets/index-CC4NVkPX.js"></script>
-  <link rel="stylesheet" crossorigin href="/eagle-agencia-digital/assets/index-BGkYXxLS.css">
+  <script type="module" crossorigin src="/eagle-agencia-digital/assets/index-DmmNNnve.js"></script>
+  <link rel="stylesheet" crossorigin href="/eagle-agencia-digital/assets/index-BEGIe2fl.css">
 </head>
   <body class="bg-brand-light dark:bg-brand-dark">
     <div id="root"></div>
