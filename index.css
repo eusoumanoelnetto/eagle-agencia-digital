@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
@@ -11,10 +15,54 @@ body {
   /* Force hardware acceleration */
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
+  /* Força o background desde o início */
+  background-color: #f7f4ef;
+  transition: background-color 0s;
+}
+
+html.dark body { 
+  background-color: #111827;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+#root { 
+  min-height: 100vh; 
+  /* Evita reflow durante carregamento */
+  contain: layout style paint;
+}
+
+/* Garante que o background apareça imediatamente */
+.bg-brand-light { background-color: #f7f4ef !important; }
+.dark .bg-brand-dark { background-color: #111827 !important; }
+
+/* Skeleton para hero durante carregamento */
+#root:empty::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #1a2a4c 0%, #2a3a5c 100%);
+  z-index: -1;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #1a2a4c;
+}
+::-webkit-scrollbar-thumb {
+  background: #c0a062;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4b274;
 }
 
 /* Otimização: garante que imagens carreguem mais rápido */
