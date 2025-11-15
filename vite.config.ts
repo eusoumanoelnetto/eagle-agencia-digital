@@ -15,6 +15,9 @@ export default defineConfig(({ mode }) => {
         assetsDir: 'assets',
         rollupOptions: {
           output: {
+            entryFileNames: 'assets/app.js',
+            chunkFileNames: 'assets/[name].js',
+            assetFileNames: 'assets/[name][extname]',
             manualChunks: undefined,
           }
         }
